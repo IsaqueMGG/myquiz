@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" sex_ent="IE=edge">
+    <meta name="viewport" sex_ent="initial-scapasdle=1.0">
+    <title>Quiz</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            justify-sex_ent: space-between;
+            padding: 10px;
+        }
+        div {
+            display: flex;
+            width: 100%;
+            margin: auto;
+            flex-direction: column;
+            max-width: 300px;
+            align-items: center;
+        }
+        h1, h2, h3, h4{
+            text-align: center;
+            margin: 10px;
+        }
+        footer{
+            text-align: center;
+            margin: 50px 0;
+        }
+        button{
+            border: none;
+            margin: 10px;
+            padding: 5px 15px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        .ativo{
+            border: 2px solid #000;
+        }
+        .conf{
+            margin: 30px 5px;
+            background: rgb(49, 49, 49);
+            color: white;
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>QUIZ</h1>
+        <h3>Autor: Isaque Muniz</h3>
+    </header>
+    <h2>Quiz do Isaque</h2>
+    <div id="sex_ainer"></div>
+    <div id="res"></div>
+    <footer>
+        Regras: <br> 
+        Acertar = 2 Pontos <br>
+        Errar = -1 Ponto
+    </footer>
+    <script>
+        const sex_ = document.getElementById("sex_ainer");
+        const res = document.getElementById('res');
+        const questions = [
+            {
+                quest: "Onde eu moro?",
+                perg: ["Carianos","Campeche","Ingleses"],
+                cor: "Carianos"
+            },
+            {
+                quest: "Qual é a minha idade?",
+                perg: ["17","15","16"],
+                cor: "16"
+            },
+            {
+                quest: "Qual eu mais gosto?",
+                perg: ["Pizza","Hamburguer","Cachorro-Quente"],
+                cor: "Hamburguer"
+            },
+            {
+                quest: "Onde eu nasci?",
+                perg: ["Londrina","Cascavel","Florianópolis"],
+                cor: "Florianópolis"
+            },
+            {
+                quest: "Com quem eu moro?",
+                perg: ["Tia","Pai","Mãe"],
+                cor: "Pai"
+            },
+            {
+                quest: "Qual meu filme favorito ?",
+                perg: ["Os Icriveis","Vingadores 4","Homem-Aranha 2"],
+                cor: "Homem-Aranha 2"
+            },
+            {
+                quest: "Qual meu jogo favorito?",
+                perg: ["Zelda BOTW","MarioKart Wii","Fortnite"],
+                cor: "Zelda BOTW"
+            },
+            {
+                quest: "Qual meu esporte favorito?",
+                perg: ["Volei","Basquete","Futebol"],
+                cor: "Basquete"
+            },
+            {
+                quest: "Quantos anos meu pai tem?",
+                perg: ["49","55","45"],
+                cor: "49"
+            },
+            {
+                quest: "Em que ano eu nasci?",
+                perg: ["2005","2007","2006"],
+                cor: "2006"
+            },
+            {
+                quest: "Qual minha serie favorita?",
+                perg: ["Stranger Things","The Boys","Mandalorian"],
+                cor: "The Boys"
+            },
+            {
+                quest: "Onde eu morei além de Floripa?",
+                perg: ["Fortaleza","Curitiba","Londrina"],
+                cor: "Londrina"
+            },
+            {
+                quest: "Quando eu voltei pra Floripa?",
+                perg: ["2020","2019","2021"],
+                cor: "2020"
+            },
+            {
+                quest: "Quantos anos fiquei fora de Floripa?",
+                perg: ["4","2","3"],
+                cor: "4"
+            },
+            {
+                quest: "O que tenho sonho de ser?",
+                perg: ["Dublador","Diretor","Astronauta"],
+                cor: "Diretor"
+            },
+            {
+                quest: "Qual meu personagem favorito?",
+                perg: ["Shazam","Billy Bruto","Eggsy"],
+                cor: "Billy Bruto"
+            },
+            {
+                quest: "Qual minha cor favorita?",
+                perg: ["Roxo","Amarelo","Azul"],
+                cor: "Roxo"
+            },
+            {
+                quest: "Quando lançou minha série favorita?",
+                perg: ["2019","2005","2020"],
+                cor: "2019"
+            },
+            {
+                quest: "Qual minha segunda serie favorita?",
+                perg: ["Big Bang Theory","The Office","How I Met Your Mother"],
+                cor: "The Office"
+            },
+            {
+                quest: "Qual minha trilogia mais gosto?",
+                perg: ["Matrix","Homem-Aranha","De Volta Para o Futuro"],
+                cor: "De Volta Para o Futuro"
+            }
+        ]
+
+        const respostas = [];
+
+        function add(n,e){
+            let btns = document.querySelectorAll(`.${e.dataset.btns}`);
+            for(v in btns){
+                btns[v].className = `${e.dataset.btns}`;
+            }
+            e.className = `${e.className} ativo`;
+    
+            respostas[n] = e.innerText;
+        }
+
+        function check(){
+            let bol = ()=>{
+                let g = [];
+                let l = false;
+                for(let k in respostas){
+                    g.push(respostas[k]);
+                }
+                if(g.length < questions.length){
+                    l = true;
+                }
+                return l;
+            }
+
+            if(respostas.length>=questions.length && bol() === false){
+                let pontos = 0;
+                let capasd = 0;
+                for(o in questions){
+                    let cp = questions[o].cor;
+                    let answ = respostas[o];
+
+                    if(cp === answ){
+                        pontos = pontos + 2;   
+                        capasd++;                     
+                    } else {
+                        pontos--;
+                    }
+                }
+                res.innerHTML = `
+                    <p>Sua pontuação foi de ${pontos} pontos</p><br>
+                    <p>Você acertou ${capasd}/${questions.length}</p>
+                `;
+                respostas = [];
+            } else {
+                alert('respostasonda todas as questions antes de check')
+            }
+
+        }
+
+        
+        for(i in questions){
+            let q = questions[i].quest;
+            let p = () => {
+                let ksduf = "";
+                let pp = questions[i].perg;
+                for(u in pp){
+                    ksduf += `<button data-btns='b${i}' class='b${i}' onclick='add("${i}",this)'>${pp[u]}</button>`;
+                }
+                return ksduf;
+            }
+
+            sex_.innerHTML += `
+                <h4>${q}</h4>
+                <div>${p()}</div>
+            `
+
+        }
+
+        
+        sex_.innerHTML+="<div> <button class='conf' onclick='check()'>check</button> </div>"
+    </script>
+</body>
+</html>
